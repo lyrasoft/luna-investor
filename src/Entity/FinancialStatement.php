@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lyrasoft\Investor\Entity;
 
 use AllowDynamicProperties;
+use Lyrasoft\Investor\Data\MonthlyReport;
 use Lyrasoft\Investor\Data\MonthlyReportCollection;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
@@ -60,6 +61,9 @@ class FinancialStatement implements EntityInterface
     #[Column('q4_individual')]
     public string $q4Individual = '';
 
+    /**
+     * @var MonthlyReportCollection|MonthlyReport[]
+     */
     #[Column('monthly_report')]
     #[JsonObject]
     public MonthlyReportCollection $monthlyReport {

@@ -29,30 +29,39 @@ use Windwalker\Edge\Component\ComponentAttributes;
  * @var $attributes ComponentAttributes
  */
 
-$attributes = $attributes->class('card w-100 mx-auto');
-$attributes['style'] = 'max-width: 450px;';
+$attributes = $attributes->class('card');
 
-$menu = $app->retrieve(MenuService::class)->createBuilder('investor-front-nav');
+$menu = $app->retrieve(MenuService::class)->createBuilder('investor-financial-nav');
 
 $menu->link(
-    '每月營收報告',
+    $lang('investor.nav.item.monthly.report'),
     $nav->to('investor_monthly_report'),
 );
 
 $menu->link(
-    '每季財務報告',
+    $lang('investor.nav.item.season.report'),
     $nav->to('investor_season_report'),
 );
 
 $menu->link(
-    '公司年報',
+    $lang('investor.nav.item.annual.report'),
     $nav->to('investor_annual_report'),
 );
 
-// $menu->link(
-//     '公司年報',
-//     $nav->to('investor_dividend_history'),
-// );
+$menu->link(
+    $lang('investor.nav.item.dividend.history'),
+    $nav->to('investor_dividend_history'),
+);
+
+$menu->link(
+    $lang('investor.nav.item.shareholder.tops'),
+    $nav->to('investor_shareholder_tops'),
+);
+
+$menu->link(
+    $lang('investor.nav.item.shareholder.meetings'),
+    $nav->to('investor_shareholder_meetings'),
+);
 
 ?>
 <div {!! $attributes !!}>
