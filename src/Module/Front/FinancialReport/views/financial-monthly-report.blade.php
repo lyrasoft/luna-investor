@@ -65,10 +65,6 @@ use Windwalker\Core\Router\SystemUri;
                 </div>
             </div>
 
-            <div class="mb-12px d-lg-none text-end">
-                <p class="body-2 text-secondary">Scroll<i class="fa-light fa-arrow-right ms-2"></i></p>
-            </div>
-
             <div class="c-report-table" data-year="113" data-aos="fade-up">
                 <div class="table-responsive c-report-table__body">
                     <table class="table table-striped">
