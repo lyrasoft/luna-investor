@@ -10,6 +10,8 @@ use Lyrasoft\Luna\Attributes\Modifier;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\RouteUri;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
@@ -102,5 +104,10 @@ class DividendHistory implements EntityInterface
     public static function setup(EntityMetadata $metadata): void
     {
         //
+    }
+
+    public function makeLink(Navigator $nav): RouteUri
+    {
+        return $nav->to('front::investor_dividend_history')->alias($this->title);
     }
 }

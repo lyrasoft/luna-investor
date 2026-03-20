@@ -8,7 +8,7 @@ namespace App\View;
  * Global variables
  * --------------------------------------------------------------
  * @var  $app       AppContext      Application context.
- * @var  $vm        \Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\\Lyrasoft\Investor\Module\Admin\DividendHistory\DividendHistoryEditView  The view model object.
+ * @var  $vm        DividendHistoryEditView  The view model object.
  * @var  $uri       SystemUri       System Uri information.
  * @var  $chronos   ChronosService  The chronos datetime service.
  * @var  $nav       Navigator       Navigator object to build route.

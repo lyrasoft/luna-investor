@@ -34,13 +34,15 @@ class FinancialStatementEditForm
     public function main(Form $form): void
     {
         $form->add('title', TextField::class)
-            ->label('年度')
+            ->label('標題')
             ->addFilter('trim')
-            ->required(true);
+            ->required(true)
+            ->help('顯示用，可用西元年或民國年等任何文字');
 
         $form->add('alias', TextField::class)
-            ->label($this->trans('unicorn.field.alias'))
-            ->addFilter('trim');
+            ->label('年份別名')
+            ->addFilter('trim')
+            ->help('作為網址用，可用西元年份，前台顯示時將以此為主要排序依據');
 
         if ($this->isLocaleEnabled()) {
             $form->add('language', LocaleSwitchField::class)
@@ -83,7 +85,7 @@ class FinancialStatementEditForm
             ->label('公司年報')
             ->showUploaded(true);
 
-        // $form->add('earnings_call_files', MultiUploaderField::class)
+        // $form->add('earnings_meeting_files', MultiUploaderField::class)
         //     ->label('法人說明會')
         //     ->configureForm(
         //         function (Form $form) {

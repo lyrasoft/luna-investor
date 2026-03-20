@@ -135,6 +135,8 @@ $localeService = $app->service(LocaleService::class);
                                 <a href="{{ $nav->to('financial_statement_edit')->id($item->id) }}">
                                     {{ $item->title }}
                                 </a>
+
+                                <span class="text-muted small">({{ $item->alias }})</span>
                             </div>
                         </td>
 

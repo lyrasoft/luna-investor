@@ -155,7 +155,7 @@ class FinancialStatementController
                 foreach ($attachments as $k => $file) {
                     $url = $fileUploadService->handleFileIfUploaded(
                         $file ?? null,
-                        'files/investor/earnings_call/' . md5((string) $data['id']) . '.{ext}',
+                        'files/investor/earnings_meeting/' . md5((string) $data['id']) . '.{ext}',
                         new FileUploadOptions(
                             storageOptions: [
                                 // If use S3
@@ -167,7 +167,7 @@ class FinancialStatementController
                     if ($url) {
                         $item = new Attachment();
 
-                        $item->type = 'earnings_call';
+                        $item->type = 'earnings_meeting';
                         $item->targetId = (int) $data['id'];
                         $item->title = $file->getClientFilename();
                         $item->size = $file->getSize();

@@ -12,6 +12,8 @@ use Lyrasoft\Luna\Attributes\Slugify;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\RouteUri;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
@@ -113,5 +115,10 @@ class FinancialStatement implements EntityInterface
     public static function setup(EntityMetadata $metadata): void
     {
         //
+    }
+
+    public function monthlyReportLink(Navigator $nav): RouteUri
+    {
+        return $nav->to('front::investor_monthly_report')->alias($this->alias);
     }
 }
