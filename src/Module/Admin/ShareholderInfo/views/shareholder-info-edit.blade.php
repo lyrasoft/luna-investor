@@ -64,7 +64,13 @@ use Windwalker\Form\Form;
 
         <div class="row">
             <div class="col-lg-7">
-                <x-fieldset name="primary_shareholders" title="主要股東名單"
+                <x-fieldset name="top_shareholders" title="十大股東"
+                    :form="$form"
+                    class="mb-4"
+                    is="card"
+                >
+                </x-fieldset>
+                <x-fieldset name="primary_shareholders" title="股權比例達百分之五之主要股東"
                     :form="$form"
                     class="mb-4"
                     is="card"

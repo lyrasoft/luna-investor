@@ -23,8 +23,8 @@ use Windwalker\Form\Form;
 
 class ShareholderInfoEditForm
 {
-    use LocaleAwareTrait;
     use TranslatorTrait;
+    use LocaleAwareTrait;
 
     #[FormDefine]
     #[NS('item')]
@@ -83,7 +83,13 @@ class ShareholderInfoEditForm
     #[NS('item')]
     public function primaryShareholders(Form $form): void
     {
+        $form->add('show_primary', SwitcherField::class)
+            ->label('主要股東顯示於前台')
+            ->circle(true)
+            ->color('primary');
+
         $form->add('primary_shareholders', RepeatableField::class)
+            ->label('主要股東')
             ->sortable(true)
             ->configureForm(
                 function (Form $form) {
@@ -102,6 +108,28 @@ class ShareholderInfoEditForm
             ->label('主要股東名單關係資料')
             ->accept('.pdf')
             ->showUploaded(true);
+    }
+
+    #[FormDefine]
+    #[Fieldset('top_shareholders')]
+    #[NS('item')]
+    public function topShareholders(Form $form): void
+    {
+        $form->add('top_shareholders', RepeatableField::class)
+            ->label('十大股東清單')
+            ->sortable(true)
+            ->configureForm(
+                function (Form $form) {
+                    $form->add('name', TextField::class)
+                        ->label('股東名稱');
+
+                    $form->add('shares', TextField::class)
+                        ->label('持有股份（股）');
+
+                    $form->add('percentage', TextField::class)
+                        ->label('持股比例 (%)');
+                }
+            );
     }
 
     // meta
@@ -124,11 +152,9 @@ class ShareholderInfoEditForm
             ->label($this->trans('unicorn.field.modified'))
             ->disabled(true);
 
-        if (WINDWALKER_DEBUG) {
-            $form->add('created_by', UserModalField::class)
-                ->label($this->trans('unicorn.field.author'))
-                ->disabled(true);
-        }
+        $form->add('created_by', UserModalField::class)
+            ->label($this->trans('unicorn.field.author'))
+            ->disabled(true);
 
         $form->add('modified_by', UserModalField::class)
             ->label($this->trans('unicorn.field.modified_by'))

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lyrasoft\Investor\Entity;
 
 use AllowDynamicProperties;
+use Lyrasoft\Investor\Data\Shareholder;
 use Lyrasoft\Investor\Data\ShareholderCollection;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
@@ -51,6 +52,9 @@ class ShareholderInfo implements EntityInterface
     #[Column('agm_video')]
     public string $agmVideo = '';
 
+    /**
+     * @var ShareholderCollection|Shareholder[]
+     */
     #[Column('top_shareholders')]
     #[JsonObject]
     public ShareholderCollection $topShareholders {
@@ -58,6 +62,9 @@ class ShareholderInfo implements EntityInterface
         set(ShareholderCollection|array|null $value) => $this->topShareholders = ShareholderCollection::wrap($value);
     }
 
+    /**
+     * @var ShareholderCollection|Shareholder[]
+     */
     #[Column('primary_shareholders')]
     #[JsonObject]
     public ShareholderCollection $primaryShareholders {

@@ -52,15 +52,7 @@ use Windwalker\Form\Form;
         action="{{ $nav->to('dividend_history_edit') }}"
         method="POST" enctype="multipart/form-data">
 
-        <x-title-bar :form="$form" ns="item">
-            @if ($vm->isLocaleEnabled())
-                <x-slot name="end">
-                        <?php
-                        $form['item/language']->currentId($item?->id) ?>
-                    <x-field :field="$form['item/language']" no-label></x-field>
-                </x-slot>
-            @endif
-        </x-title-bar>
+        <x-title-bar :form="$form" ns="item"></x-title-bar>
 
         <div class="row">
             <div class="col-lg-7">

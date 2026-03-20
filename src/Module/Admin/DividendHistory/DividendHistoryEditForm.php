@@ -33,13 +33,6 @@ class DividendHistoryEditForm
             ->addFilter('trim')
             ->required(true);
 
-        $form->add('language', LocaleSwitchField::class)
-            ->label($this->trans('luna.field.language'))
-            ->table(DividendHistory::class)
-            ->required(true)
-            ->canChangeSelfLang(false)
-            ->allowCreateEmpty(true);
-
         $form->add('id', HiddenField::class);
     }
 
