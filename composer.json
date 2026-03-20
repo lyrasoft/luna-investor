@@ -1,0 +1,23 @@
+{
+    "name": "lyrasoft/investor",
+    "description": "LYRASOFT investor package",
+    "type": "windwalker-package",
+    "require": {
+        "php": ">=8.4.6",
+        "windwalker/core": "^4.2",
+        "lyrasoft/luna": "^2.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lyrasoft\\Investor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Simon Asika",
+            "email": "asika32764@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta"
+}
