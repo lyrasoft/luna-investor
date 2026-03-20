@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lyrasoft\Investor\Entity;
 
 use AllowDynamicProperties;
-use App\Data\Financial\MonthlyReportCollection;
+use Lyrasoft\Investor\Data\MonthlyReportCollection;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
 use Lyrasoft\Luna\Attributes\Slugify;

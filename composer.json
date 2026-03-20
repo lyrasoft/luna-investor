@@ -19,5 +19,15 @@
             "email": "asika32764@gmail.com"
         }
     ],
-    "minimum-stability": "beta"
+    "minimum-stability": "beta",
+    "extra": {
+        "windwalker":{
+            "packages": [
+                "Lyrasoft\\Investor\\InvestorPackage"
+            ],
+            "modules": [
+                "src/Module"
+            ]
+        }
+    }
 }

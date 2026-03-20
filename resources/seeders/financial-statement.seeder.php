@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Data\Financial\MonthlyReport;
+use Lyrasoft\Investor\Data\MonthlyReport;
 use Lyrasoft\Investor\Entity\FinancialStatement;
 use Lyrasoft\Luna\Services\AssociationService;
 use Lyrasoft\Luna\Services\LocaleService;

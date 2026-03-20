@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lyrasoft\Investor\Entity;
 
 use AllowDynamicProperties;
-use App\Data\Financial\ShareholderCollection;
+use Lyrasoft\Investor\Data\ShareholderCollection;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
 use Unicorn\Enum\BasicState;

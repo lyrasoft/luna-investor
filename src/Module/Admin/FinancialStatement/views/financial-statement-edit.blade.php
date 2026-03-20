@@ -16,7 +16,7 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
-use App\Data\Financial\MonthlyReport;
+use App\Data\MonthlyReport;
 use Lyrasoft\Investor\Entity\FinancialStatement;
 use Lyrasoft\Investor\Module\Admin\FinancialStatement\FinancialStatementEditView;
 use Windwalker\Core\Application\AppContext;

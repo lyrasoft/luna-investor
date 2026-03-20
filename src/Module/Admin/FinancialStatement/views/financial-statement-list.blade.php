@@ -17,6 +17,7 @@ namespace App\View;
  */
 
 use Lyrasoft\Investor\Entity\FinancialStatement;
+use Lyrasoft\Luna\Services\LocaleService;
 use Unicorn\Workflow\BasicStateWorkflow;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
@@ -31,6 +32,8 @@ use Lyrasoft\Investor\Module\Admin\FinancialStatement\FinancialStatementListView
  */
 
 $workflow = $app->service(BasicStateWorkflow::class);
+
+$localeService = $app->service(LocaleService::class);
 ?>
 
 @push('macro')
@@ -83,12 +86,14 @@ $workflow = $app->service(BasicStateWorkflow::class);
                         </x-sort>
                     </th>
 
-                    {{-- Language --}}
-                    <th style="width: 10%">
-                        <x-sort field="financial_statement.language">
-                            @lang('luna.field.language')
-                        </x-sort>
-                    </th>
+                    @if ($localeService->isEnabled())
+                        {{-- Language --}}
+                        <th style="width: 10%">
+                            <x-sort field="financial_statement.language">
+                                @lang('luna.field.language')
+                            </x-sort>
+                        </th>
+                    @endif
 
                     {{-- Delete --}}
                     <th style="width: 1%" class="text-nowrap">
@@ -133,16 +138,18 @@ $workflow = $app->service(BasicStateWorkflow::class);
                             </div>
                         </td>
 
-                        {{-- Language --}}
-                        <td>
-                            <x-lang-dropdown
-                                type="financial_statement"
-                                :table="$item::class"
-                                :item="$item"
-                                :language="$item->lang"
-                                class="w-100"
-                            ></x-lang-dropdown>
-                        </td>
+                        @if ($localeService->isEnabled())
+                            {{-- Language --}}
+                            <td>
+                                <x-lang-dropdown
+                                    type="financial_statement"
+                                    :table="$item::class"
+                                    :item="$item"
+                                    :language="$item->lang"
+                                    class="w-100"
+                                ></x-lang-dropdown>
+                            </td>
+                        @endif
 
                         {{-- Delete --}}
                         <td class="text-center">
