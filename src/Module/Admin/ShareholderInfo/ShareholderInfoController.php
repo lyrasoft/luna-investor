@@ -45,44 +45,44 @@ class ShareholderInfoController
 
                 $data['notice_file'] = $fileUploadService->handleFileIfUploaded(
                     $files['notice_file'] ?? null,
-                    'files/shareholder-info/' . $data['id'] . '/agm-notice.{ext}',
+                    'files/investor/shareholder-info/' . $data['id'] . '/agm-notice.{ext}',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ,
+                            'ACL' => S3Service::ACL_PUBLIC_READ,
                         ]
                     )
                 )?->getUri(true) ?? $data['notice_file'] ?? null;
 
                 $data['agenda_file'] = $fileUploadService->handleFileIfUploaded(
                     $files['agenda_file'] ?? null,
-                    'files/shareholder-info/' . $data['id'] . '/agm-agenda.{ext}',
+                    'files/investor/shareholder-info/' . $data['id'] . '/agm-agenda.{ext}',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ,
+                            'ACL' => S3Service::ACL_PUBLIC_READ,
                         ]
                     )
                 )?->getUri(true) ?? $data['agenda_file'] ?? null;
 
                 $data['minutes_file'] = $fileUploadService->handleFileIfUploaded(
                     $files['minutes_file'] ?? null,
-                    'files/shareholder-info/' . $data['id'] . '/agm-minutes.{ext}',
+                    'files/investor/shareholder-info/' . $data['id'] . '/agm-minutes.{ext}',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ,
+                            'ACL' => S3Service::ACL_PUBLIC_READ,
                         ]
                     )
                 )?->getUri(true) ?? $data['minutes_file'] ?? null;
 
                 $data['primary_shareholder_doc'] = $fileUploadService->handleFileIfUploaded(
                     $files['primary_shareholder_doc'] ?? null,
-                    'files/shareholder-info/' . $data['id'] . '/primary-shareholders.{ext}',
+                    'files/investor/shareholder-info/' . $data['id'] . '/primary-shareholders.{ext}',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ,
+                            'ACL' => S3Service::ACL_PUBLIC_READ,
                         ]
                     )
                 )?->getUri(true) ?? $data['primary_shareholder_doc'] ?? null;

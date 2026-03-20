@@ -16,7 +16,6 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
-use App\Data\MonthlyReport;
 use Lyrasoft\Investor\Entity\FinancialStatement;
 use Lyrasoft\Investor\Module\Admin\FinancialStatement\FinancialStatementEditView;
 use Windwalker\Core\Application\AppContext;
@@ -88,8 +87,8 @@ use Windwalker\Form\Form;
                                 <x-attachment-field
                                     :items="$attachments"
                                     :insertBtn="false"
-                                    :accept="'pdf'"
-                                    :mutiple="true"
+                                    accept=".pdf"
+                                    :multiple="true"
                                     :sortable="true"
                                 >
                                 </x-attachment-field>
@@ -180,54 +179,59 @@ use Windwalker\Form\Form;
                                             />
                                         </td>
 
-                                        @if(WINDWALKER_DEBUG)
-                                            <td>
-                                                <div class="d-flex gap-3">
-                                                    <input
-                                                        type="file"
-                                                        name="item[monthly_report][{{ $month }}][revenueSummary]"
-                                                        class="form-control"
-                                                        accept=".pdf"
-                                                        style="min-width: 250px"
-                                                    />
+                                        <td>
+                                            <div class="d-flex gap-3">
+                                                <input
+                                                    type="file"
+                                                    name="item[monthly_report][{{ $month }}][revenueSummary]"
+                                                    class="form-control"
+                                                    accept=".pdf"
+                                                    style="min-width: 250px"
+                                                />
 
-                                                    @if ($monthlyReport->revenueSummary)
-                                                        <div class="input-group flex-nowrap">
-                                                            <div class="input-group-text">
-                                                                <span class="far fa-file-pdf"></span>
-                                                                <div class="text-truncate mx-2" style="max-width: 200px"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="{{ Path::getFilename($monthlyReport->revenueSummary) }}"
-                                                                >
-                                                                    <a href="{{ $monthlyReport->revenueSummary }}"
-                                                                        target="_blank" rel="noopener">
-                                                                        {{ Path::getFilename($monthlyReport->revenueSummary) }}
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="input-group-text">
-                                                                <div class="form-check m-0" style="min-height: 18px;">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        name="item[monthly_report][{{ $month }}][removeRevenueSummary]"
-                                                                        class="form-check-input"
-                                                                        id="remove-revenue-summary-{{ $month }}"
-                                                                        style="height: 20px;"
-                                                                    />
-                                                                    <label
-                                                                        for="remove-revenue-summary-{{ $month }}"
-                                                                        class="form-check-label mb-0"
-                                                                    >
-                                                                        刪除
-                                                                    </label>
-                                                                </div>
+                                                @if ($monthlyReport->revenueSummary)
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-file-pdf"></span>
+                                                            <div class="text-truncate mx-2" style="max-width: 200px"
+                                                                data-bs-toggle="tooltip"
+                                                                title="{{ Path::getFilename($monthlyReport->revenueSummary) }}"
+                                                            >
+                                                                <a href="{{ $monthlyReport->revenueSummary }}"
+                                                                    target="_blank" rel="noopener">
+                                                                    {{ Path::getFilename($monthlyReport->revenueSummary) }}
+                                                                </a>
                                                             </div>
                                                         </div>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        @endif
+
+                                                        <div class="input-group-text">
+                                                            <div class="form-check m-0" style="min-height: 18px;">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    class="form-check-input"
+                                                                    style="height: 20px;"
+                                                                    name="item[monthly_report][{{ $month }}][removeRevenueSummary]"
+                                                                    id="input-remove-revenue-summary-{{ $month }}"
+                                                                    value="1"
+                                                                />
+                                                                <input
+                                                                    type="hidden"
+                                                                    name="item[monthly_report][{{ $month }}][revenueSummary]"
+                                                                    id="input-revenue-summary-{{ $month }}"
+                                                                    value="{{ $monthlyReport->revenueSummary }}"
+                                                                />
+                                                                <label
+                                                                    for="input-remove-revenue-summary-{{ $month }}"
+                                                                    class="form-check-label mb-0"
+                                                                >
+                                                                    刪除
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lyrasoft\Investor\Module\Admin\FinancialStatement;
 
-use App\Entity\Attachment;
+use Lyrasoft\Attachment\Entity\Attachment;
 use Lyrasoft\Investor\Repository\FinancialStatementRepository;
 use Lyrasoft\Luna\Attributes\LangAssoc;
 use Unicorn\Aws\S3Service;
@@ -48,66 +48,66 @@ class FinancialStatementController
 
                 $data['q1_consolidated'] = $fileUploadService->handleFileIfUploaded(
                     $files['q1_consolidated'] ?? null,
-                    'files/financial-statements/' . $data['id'] . '/q1-consolidated.pdf',
+                    'files/investor/financial-statements/' . $data['id'] . '/q1-consolidated.pdf',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ
+                            'ACL' => S3Service::ACL_PUBLIC_READ
                         ]
                     )
                 )?->getUri(true) ?? $data['q1_consolidated'] ?? null;
 
                 $data['q2_consolidated'] = $fileUploadService->handleFileIfUploaded(
                     $files['q2_consolidated'] ?? null,
-                    'files/financial-statements/' . $data['id'] . '/q2-consolidated.pdf',
+                    'files/investor/financial-statements/' . $data['id'] . '/q2-consolidated.pdf',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ
+                            'ACL' => S3Service::ACL_PUBLIC_READ
                         ]
                     )
                 )?->getUri(true) ?? $data['q2_consolidated'] ?? null;
 
                 $data['q3_consolidated'] = $fileUploadService->handleFileIfUploaded(
                     $files['q3_consolidated'] ?? null,
-                    'files/financial-statements/' . $data['id'] . '/q3-consolidated.pdf',
+                    'files/investor/financial-statements/' . $data['id'] . '/q3-consolidated.pdf',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ
+                            'ACL' => S3Service::ACL_PUBLIC_READ
                         ]
                     )
                 )?->getUri(true) ?? $data['q3_consolidated'] ?? null;
 
                 $data['q4_consolidated'] = $fileUploadService->handleFileIfUploaded(
                     $files['q4_consolidated'] ?? null,
-                    'files/financial-statements/' . $data['id'] . '/q4-consolidated.pdf',
+                    'files/investor/financial-statements/' . $data['id'] . '/q4-consolidated.pdf',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ
+                            'ACL' => S3Service::ACL_PUBLIC_READ
                         ]
                     )
                 )?->getUri(true) ?? $data['q4_consolidated'] ?? null;
 
                 $data['q4_individual'] = $fileUploadService->handleFileIfUploaded(
                     $files['q4_individual'] ?? null,
-                    'files/financial-statements/' . $data['id'] . '/q4-individual.pdf',
+                    'files/investor/financial-statements/' . $data['id'] . '/q4-individual.pdf',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ
+                            'ACL' => S3Service::ACL_PUBLIC_READ
                         ]
                     )
                 )?->getUri(true) ?? $data['q4_individual'] ?? null;
 
                 $data['annual_report'] = $fileUploadService->handleFileIfUploaded(
                     $files['annual_report'] ?? null,
-                    'files/financial-statements/' . $data['id'] . '/annual-report.pdf',
+                    'files/investor/financial-statements/' . $data['id'] . '/annual-report.pdf',
                     new FileUploadOptions(
                         storageOptions: [
                             // If use S3
-                            'acl' => S3Service::ACL_PUBLIC_READ
+                            'ACL' => S3Service::ACL_PUBLIC_READ
                         ]
                     )
                 )?->getUri(true) ?? $data['annual_report'] ?? null;
@@ -117,16 +117,16 @@ class FinancialStatementController
                 // Monthly report
                 foreach (range(1, 12) as $month) {
                     if ($app->input('item')['monthly_report'][$month]['removeRevenueSummary'] ?? 0) {
-                        $data['monthly_report'][$month]['revenueSummary'] = null;
+                        $data['monthly_report'][$month]['revenueSummary'] = '';
                     }
 
                     $data['monthly_report'][$month]['revenueSummary'] = $fileUploadService->handleFileIfUploaded(
                         $files['monthly_report'][$month]['revenueSummary'] ?? null,
-                        'files/financial-statements/' . $data['id'] . "/monthly-report-{$month}.pdf",
+                        'files/investor/financial-statements/' . $data['id'] . "/monthly-report-{$month}.pdf",
                         new FileUploadOptions(
                             storageOptions: [
                                 // If use S3
-                                'acl' => S3Service::ACL_PUBLIC_READ
+                                'ACL' => S3Service::ACL_PUBLIC_READ
                             ]
                         )
                     )?->getUri(true)?->__toString() ?? $data['monthly_report'][$month]['revenueSummary'] ?? '';
@@ -136,7 +136,7 @@ class FinancialStatementController
                 $existsAttachments = (array) $app->input('attachments');
 
                 foreach ($existsAttachments as $i => $id) {
-                    $orm->updateWhere(
+                    $orm->updateBulk(
                         Attachment::class,
                         [
                             'ordering' => $i,
@@ -149,28 +149,33 @@ class FinancialStatementController
                 $removeAttachments = $app->input('remove_attachments') ?? [];
 
                 foreach ($removeAttachments as $removeAttachment) {
-                    $orm->deleteWhere(Attachment::class, ['id' => $removeAttachment]);
+                    $orm->deleteOne(Attachment::class, $removeAttachment);
                 }
 
-                foreach ($attachments as $k => $attachment) {
+                foreach ($attachments as $k => $file) {
                     $url = $fileUploadService->handleFileIfUploaded(
-                        $attachment ?? null,
-                        'financial_statement/' . md5((string) $data['id']) . '.{ext}'
+                        $file ?? null,
+                        'files/investor/earnings_call/' . md5((string) $data['id']) . '.{ext}',
+                        new FileUploadOptions(
+                            storageOptions: [
+                                // If use S3
+                                'ACL' => S3Service::ACL_PUBLIC_READ
+                            ]
+                        )
                     )?->getUri(true);
+
                     if ($url) {
                         $item = new Attachment();
 
-                        $item->type = 'file';
-                        $item->kind = 'financial_file';
-                        $item->permission = 'default';
+                        $item->type = 'earnings_call';
                         $item->targetId = (int) $data['id'];
-                        $item->title = $attachment->getClientFilename();
-                        $item->size = $attachment->getSize();
+                        $item->title = $file->getClientFilename();
+                        $item->size = $file->getSize();
+                        $item->mime = $file->getClientMediaType();
                         $item->path = (string) $url;
-                        $item->state = 1;
                         $item->ordering = count($existsAttachments) + $k + 1;
 
-                        $orm->createOne(Attachment::class, $item);
+                        $orm->createOne($item);
                     }
                 }
 

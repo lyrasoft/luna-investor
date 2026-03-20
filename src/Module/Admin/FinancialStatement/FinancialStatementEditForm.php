@@ -38,11 +38,9 @@ class FinancialStatementEditForm
             ->addFilter('trim')
             ->required(true);
 
-        if (WINDWALKER_DEBUG) {
-            $form->add('alias', TextField::class)
-                ->label($this->trans('unicorn.field.alias'))
-                ->addFilter('trim');
-        }
+        $form->add('alias', TextField::class)
+            ->label($this->trans('unicorn.field.alias'))
+            ->addFilter('trim');
 
         if ($this->isLocaleEnabled()) {
             $form->add('language', LocaleSwitchField::class)

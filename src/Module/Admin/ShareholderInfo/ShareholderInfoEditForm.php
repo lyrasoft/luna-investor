@@ -7,6 +7,7 @@ namespace Lyrasoft\Investor\Module\Admin\ShareholderInfo;
 use Lyrasoft\Investor\Entity\ShareholderInfo;
 use Lyrasoft\Luna\Field\LocaleSwitchField;
 use Lyrasoft\Luna\Field\UserModalField;
+use Lyrasoft\Luna\Locale\LocaleAwareTrait;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\FileDragField;
 use Unicorn\Field\RepeatableField;
@@ -22,6 +23,7 @@ use Windwalker\Form\Form;
 
 class ShareholderInfoEditForm
 {
+    use LocaleAwareTrait;
     use TranslatorTrait;
 
     #[FormDefine]
@@ -33,12 +35,14 @@ class ShareholderInfoEditForm
             ->addFilter('trim')
             ->required(true);
 
-        $form->add('language', LocaleSwitchField::class)
-            ->label($this->trans('luna.field.language'))
-            ->table(ShareholderInfo::class)
-            ->required(true)
-            ->canChangeSelfLang(false)
-            ->allowCreateEmpty(true);
+        if ($this->isLocaleEnabled()) {
+            $form->add('language', LocaleSwitchField::class)
+                ->label($this->trans('luna.field.language'))
+                ->table(ShareholderInfo::class)
+                ->required(true)
+                ->canChangeSelfLang(false)
+                ->allowCreateEmpty(true);
+        }
 
         $form->add('id', HiddenField::class);
     }

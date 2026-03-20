@@ -54,10 +54,10 @@ class FinancialStatementEditView
             ->fillTo('item', $this->repository->getState()->getAndForget('edit.data'));
 
         $attachments = $this->orm->from(Attachment::class)
-            ->where('type', 'file')
+            ->where('type', 'earnings_call')
             ->where('target_id', $item?->id ?? 0)
             ->order('ordering', 'ASC')
-            ->all();
+            ->all(Attachment::class);
 
         return compact('form', 'id', 'item', 'attachments');
     }

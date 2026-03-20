@@ -22,30 +22,30 @@ use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 
-use Windwalker\Core\Router\
+?>
 <div x-title="toolbar" x-data="{ form: $store.form }" class="l-toolbar">
     {{-- Save --}}
-<button type="button" class="btn btn-success btn-sm uni-btn-save"
-    data-task="save"
-    @click="form.post();"
-    style="width: 150px"
->
-    <span class="fa fa-save"></span>
-    @lang('unicorn.toolbar.save')
-</button>
+    <button type="button" class="btn btn-success btn-sm uni-btn-save"
+        data-task="save"
+        @click="form.post();"
+        style="width: 150px"
+    >
+        <span class="fa fa-save"></span>
+        @lang('unicorn.toolbar.save')
+    </button>
 
-{{-- Save2Close --}}
-<button type="button" class="btn btn-primary btn-sm uni-btn-save2close"
-    data-task="save"
-    @click="form.post(null, { task: 'save2close' });">
-    <span class="fa fa-check"></span>
-    @lang('unicorn.toolbar.save2close')
-</button>
+    {{-- Save2Close --}}
+    <button type="button" class="btn btn-primary btn-sm uni-btn-save2close"
+        data-task="save"
+        @click="form.post(null, { task: 'save2close' });">
+        <span class="fa fa-check"></span>
+        @lang('unicorn.toolbar.save2close')
+    </button>
 
-{{-- Cancel --}}
-<a class="btn btn-default btn-outline-secondary btn-sm uni-btn-cancel"
-    href="{{ $nav->to('dividend_history_list') }}">
-    <span class="fa fa-times"></span>
-    @lang('unicorn.toolbar.cancel')
-</a>
+    {{-- Cancel --}}
+    <a class="btn btn-default btn-outline-secondary btn-sm uni-btn-cancel"
+        href="{{ $nav->to('dividend_history_list') }}">
+        <span class="fa fa-times"></span>
+        @lang('unicorn.toolbar.cancel')
+    </a>
 </div>
